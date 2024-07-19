@@ -10,10 +10,9 @@ function Enhancer() {
   const [loading, setLoading] = useState(false);
   const [enhancementType, setEnhancementType] = useState('metal');
   const [preview, setPreview] = useState(null);
+  const [text, setText] = useState('');
 
-
-
-const handleFileUpload = (acceptedFiles) => {
+  const handleFileUpload = (acceptedFiles) => {
     const file = acceptedFiles[0];
     setSelectedFile(file);
 
@@ -24,36 +23,37 @@ const handleFileUpload = (acceptedFiles) => {
     reader.readAsDataURL(file);
 
     // Upload file to the specified URL
-    const uploadUrl = "http://localhost:8080/image";
+    const uploadUrl = "https://bb57-200-61-165-45.ngrok-free.app/image";
     const formData = new FormData();
     formData.append('file', file);
 
     axios.post(uploadUrl, formData)
-    .then((response) => {
-      console.log('File uploaded successfully:', response.data);
+      .then((response) => {
+        console.log('File uploaded successfully:', response.data);
       })
-    .catch((error) => {
-      console.error('Error uploading file:', error);
-    });
-};
-
-const handleEnhanceImage = async () => {
-  if (!selectedFile) return;
-
-  setLoading(true);
-
-  const enhancementUrl = "http://localhost:8080/prompt";
-  const data = {
-      filename: selectedFile.name,
-      enhancementType: enhancementType
+      .catch((error) => {
+        console.error('Error uploading file:', error);
+      });
   };
 
-  try {
+  const handleEnhanceImage = async () => {
+    if (!selectedFile) return;
+
+    setLoading(true);
+
+    const enhancementUrl = "https://bb57-200-61-165-45.ngrok-free.app/prompt";
+    const data = {
+      filename: selectedFile.name,
+      enhancementType: enhancementType,
+      text: text // Include the text in the request data
+    };
+
+    try {
       const response = await axios.post(enhancementUrl, data, {
-          responseType: 'arraybuffer', // Specify the response type as arraybuffer
-          headers: {
-              'Content-Type': 'application/json',
-          },
+        responseType: 'arraybuffer', // Specify the response type as arraybuffer
+        headers: {
+          'Content-Type': 'application/json',
+        },
       });
 
       // Assuming the server sends back an arraybuffer, convert it to base64 or process as needed
@@ -61,16 +61,16 @@ const handleEnhanceImage = async () => {
       const enhancedImageUrl = `data:image/jpeg;base64,${base64Image}`;
 
       setEnhancedImage(enhancedImageUrl);
-  } catch (error) {
+    } catch (error) {
       console.error('Error enhancing image:', error);
-  } finally {
+    } finally {
       setLoading(false);
-  }
-};
+    }
+  };
 
   return (
     <div className="Enhancer">
-      <h1>Image enhancer</h1>
+      <h1>Image Enhancer</h1>
       <Dropzone onDrop={handleFileUpload} multiple={false}>
         {({ getRootProps, getInputProps }) => (
           <div {...getRootProps()} className="dropzone">
@@ -78,13 +78,14 @@ const handleEnhanceImage = async () => {
             {preview ? (
               <img src={preview} alt="Selected" className="preview" />
             ) : (
-              <p>Drag & drop a image here, or click to select one</p>
+              <p>Drag & drop an image here, or click to select one</p>
             )}
+            
           </div>
         )}
       </Dropzone>
       {selectedFile && (
-        <div>
+        <div className="control">
           <p>Selected File: {selectedFile.name}</p>
           <div className="radio-buttons">
             <input
@@ -106,13 +107,22 @@ const handleEnhanceImage = async () => {
             />
             <label htmlFor="gems">Gems</label>
           </div>
+          <div className="text-input">
+            <label htmlFor="text">Enter text prompt:</label>
+            <input
+              type="text"
+              id="text"
+              value={text}
+              onChange={(e) => setText(e.target.value)}
+            />
+          </div>
           <button onClick={handleEnhanceImage}>Enhance Image</button>
         </div>
       )}
       {loading && <p>Enhancing image...</p>}
       {enhancedImage && (
         <div>
-          <h2>Enhanced image:</h2>
+          <h2>Enhanced Image:</h2>
           <img src={enhancedImage} alt="Enhanced" />
         </div>
       )}
