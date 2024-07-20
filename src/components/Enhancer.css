@@ -29,8 +29,8 @@ h1 {
 }
 
 .preview {
-  max-width: 400px;
-  max-height: auto;
+  width: 400px;
+  height: auto;
   border: 2px dashed #ccc;
   background-color: #fff; 
   border-radius: 10px; 
