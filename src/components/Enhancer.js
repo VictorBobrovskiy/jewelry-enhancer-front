@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import Dropzone from 'react-dropzone';
-import './Enhancer.css';
 import { Buffer } from 'buffer';
+import { Container, Row, Col, Button, Form, Spinner, Image } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './Enhancer.css';
 
 function Enhancer() {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -22,8 +24,7 @@ function Enhancer() {
     };
     reader.readAsDataURL(file);
 
-    // Upload file to the specified URL
-    const uploadUrl = "https://bb57-200-61-165-45.ngrok-free.app/image";
+    const uploadUrl = "https://1e93-200-61-165-45.ngrok-free.app/image";
     const formData = new FormData();
     formData.append('file', file);
 
@@ -41,22 +42,21 @@ function Enhancer() {
 
     setLoading(true);
 
-    const enhancementUrl = "https://bb57-200-61-165-45.ngrok-free.app/prompt";
+    const enhancementUrl = "https://1e93-200-61-165-45.ngrok-free.app/prompt";
     const data = {
       filename: selectedFile.name,
       enhancementType: enhancementType,
-      text: text // Include the text in the request data
+      text: text
     };
 
     try {
       const response = await axios.post(enhancementUrl, data, {
-        responseType: 'arraybuffer', // Specify the response type as arraybuffer
+        responseType: 'arraybuffer',
         headers: {
           'Content-Type': 'application/json',
         },
       });
 
-      // Assuming the server sends back an arraybuffer, convert it to base64 or process as needed
       const base64Image = Buffer.from(response.data, 'binary').toString('base64');
       const enhancedImageUrl = `data:image/jpeg;base64,${base64Image}`;
 
@@ -69,64 +69,81 @@ function Enhancer() {
   };
 
   return (
-    <div className="Enhancer">
-      <h1>Image Enhancer</h1>
+    <Container className="wrapper">
+      <h1>Jewelry Enhancer Pro</h1>
+      <Container className="enhancer">
       <Dropzone onDrop={handleFileUpload} multiple={false}>
         {({ getRootProps, getInputProps }) => (
           <div {...getRootProps()} className="dropzone">
             <input {...getInputProps()} />
             {preview ? (
-              <img src={preview} alt="Selected" className="preview" />
+              <Image src={preview} alt="Selected" className="preview" fluid />
             ) : (
               <p>Drag & drop an image here, or click to select one</p>
             )}
-            
           </div>
         )}
       </Dropzone>
       {selectedFile && (
-        <div className="control">
-          <p>Selected File: {selectedFile.name}</p>
-          <div className="radio-buttons">
-            <input
-              type="radio"
-              id="metal"
-              name="enhancementType"
-              value="metal"
-              checked={enhancementType === 'metal'}
-              onChange={(e) => setEnhancementType(e.target.value)}
-            />
-            <label htmlFor="metal">Metal</label>
-            <input
-              type="radio"
-              id="gems"
-              name="enhancementType"
-              value="gems"
-              checked={enhancementType === 'gems'}
-              onChange={(e) => setEnhancementType(e.target.value)}
-            />
-            <label htmlFor="gems">Gems</label>
-          </div>
-          <div className="text-input">
-            <label htmlFor="text">Enter text prompt:</label>
-            <input
-              type="text"
-              id="text"
-              value={text}
-              onChange={(e) => setText(e.target.value)}
-            />
-          </div>
-          <button onClick={handleEnhanceImage}>Enhance Image</button>
-        </div>
+        <Row className="control">
+          <Col className="selectedFile">
+            <p>Selected File: {selectedFile.name}</p>
+            <Form className="form">
+              <Form.Group>
+                <Form.Label>Enhancement type</Form.Label>
+                <div>
+                  <Form.Check 
+                    className="formCheck"
+                    type="radio" 
+                    id="metal" 
+                    name="enhancementType" 
+                    value="metal" 
+                    label="Metal" 
+                    checked={enhancementType === 'metal'} 
+                    onChange={(e) => setEnhancementType(e.target.value)} 
+                  />
+                  <Form.Check 
+                    className="formCheck"
+                    type="radio" 
+                    id="gems" 
+                    name="enhancementType" 
+                    value="gems" 
+                    label="Gems" 
+                    checked={enhancementType === 'gems'} 
+                    onChange={(e) => setEnhancementType(e.target.value)} 
+                  />
+                </div>
+              </Form.Group>
+
+              <Form.Group>
+                <Form.Control 
+                  className="textArea"
+                  type="text" 
+                  id="text" 
+                  placeholder="Enter text prompt"
+                  value={text} 
+                  onChange={(e) => setText(e.target.value)} 
+                />
+              </Form.Group>
+              <Button onClick={handleEnhanceImage} disabled={loading}>Enhance Image</Button>
+            </Form>
+          </Col>
+        </Row>
       )}
-      {loading && <p>Enhancing image...</p>}
+      {loading && <Spinner animation="border" role="status"><span className="sr-only">Enhancing image...</span></Spinner>}
       {enhancedImage && (
-        <div>
-          <h2>Enhanced Image:</h2>
-          <img src={enhancedImage} alt="Enhanced" />
-        </div>
+        <Row cl>
+          <Col>
+
+            <Image
+            className="preview"
+            src={enhancedImage} 
+            alt="Enhanced" fluid />
+          </Col>
+        </Row>
       )}
-    </div>
+      </Container>
+    </Container>
   );
 }
 

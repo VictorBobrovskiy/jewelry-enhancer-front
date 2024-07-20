@@ -1,93 +1,65 @@
-.Enhancer {
+h1 {
   text-align: center;
-  padding: 20px;
-
-  display: flex;
-  flex-direction: column;
-  justify-content:center;
-  justify-items: center;
-
+  margin: 20px auto;
 }
 
-.control {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  text-align: center;
-  padding: 15px;
+.wrapper {
+  margin: 0 auto;
+  padding: 0;
 }
 
-button {
-  margin-top: 20px;
-  padding: 2%;
-  background-color: grey;
-  color: #fff;
-  border-radius: 5px;
-  border: none;
-  font-size: 15px;
+.enhancer {
+  text-align: left;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }
 
 
 .dropzone {
   border: 2px dashed #ccc;
-  width: 512px;
-  height: 512px;
+  width: 400px;
+  height: 400px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
-  background-color: #fff; /* Добавлен фон */
-  border-radius: 10px; /* Добавлены скругленные углы */
+  background-color: #fff;
+  border-radius: 10px;
 }
-
-.dropzone img {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-}
-
-.radio-buttons {
-  display: inline;
-}
-
-.radio-buttons input {
-  margin: 25px 5px 25px 25px;
-}
-
-
-.text-input {
-  margin: 0;
-}
-
-.text-input input {
-  border-radius: 5px;
-  border: none;
-  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5);
-  padding: 2%;
-  text-align: start;
-  min-width: 450px;
-  min-height: 30px;
-  margin: 10px 10px;
-  width: 90%;
-  font-size: 15px;
-}
-
 
 .preview {
-  max-width: 512px;
-  max-height: 512px;
-  margin-top: 20px;
-  border: 1px solid #ccc;
-  padding: 10px;
-  background-color: #fff; /* Добавлен фон */
-  border-radius: 10px; /* Добавлены скругленные углы */
+  max-width: 400px;
+  max-height: auto;
+  border: 2px dashed #ccc;
+  background-color: #fff; 
+  border-radius: 10px; 
 }
 
-img {
-  max-width: 512px;
-  max-height: 512px;
-  margin-top: 20px;
+.control {
+  margin: 0 20px;
+  background-color: #ccc;
+  border-radius: 10px;
+  width: 400px;
 }
 
+.form {
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  margin: 10px auto;
+}
+
+.selectedFile {
+  margin: 20px 10px;
+}
+
+.formCheck {
+  margin: 10px auto;
+  text-align: left;
+}
+
+.textArea {
+  margin: 20px auto;
+}
