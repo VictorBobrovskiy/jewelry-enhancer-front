@@ -2,7 +2,6 @@
   "name": "jewelry-enhancer",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https:///VictorBobrovskiy.github.io/jewelry-enhancer-front/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",

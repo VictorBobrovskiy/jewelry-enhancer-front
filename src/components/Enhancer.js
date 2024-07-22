@@ -24,7 +24,7 @@ function Enhancer() {
     };
     reader.readAsDataURL(file);
 
-    const uploadUrl = "https://1e93-200-61-165-45.ngrok-free.app/image";
+    const uploadUrl = "https://7809-181-29-45-213.ngrok-free.app/image";
     const formData = new FormData();
     formData.append('file', file);
 
@@ -42,7 +42,7 @@ function Enhancer() {
 
     setLoading(true);
 
-    const enhancementUrl = "https://1e93-200-61-165-45.ngrok-free.app/prompt";
+    const enhancementUrl = "https://7809-181-29-45-213.ngrok-free.app/prompt";
     const data = {
       filename: selectedFile.name,
       enhancementType: enhancementType,
