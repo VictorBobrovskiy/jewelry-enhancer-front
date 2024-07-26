@@ -17,7 +17,6 @@ h1 {
 
 .enhancer p{
   text-align: left;
-  text-decoration: solid;
 }
 
 
@@ -57,6 +56,13 @@ h1 {
   margin: 10px auto;
 }
 
+.form {
+  height: 320px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 10px auto;
+}
 
 .formCheck {
   margin: 2px;
@@ -99,6 +105,7 @@ h1 {
   background: #4CAF50;
   cursor: pointer;
 }
+
 .loading-block {
   padding: 2%;
   border: 2px dashed #ccc;
@@ -107,12 +114,11 @@ h1 {
   text-align: left;
 }
 
-.spinner-border {
-  color: blue;
-  width: 3rem;
-  height: 3rem;
-  margin-bottom: 10px;
+.advice {
+  margin-top: 5%;
+  font-style: italic;
 }
+
 
 .dots::after {
   content: '';

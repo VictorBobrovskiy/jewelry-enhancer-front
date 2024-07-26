@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Axios from 'axios';
 import Dropzone from 'react-dropzone';
 import { Container, Row, Col, Button, Form, Spinner, Image } from 'react-bootstrap';
@@ -13,6 +13,25 @@ function Enhancer() {
   const [preview, setPreview] = useState(null);
   const [text, setText] = useState('');
   const [denoiseLevel, setDenoiseLevel] = useState(0.3);
+  const [elapsedTime, setElapsedTime] = useState(0);
+
+  useEffect(() => {
+    let interval;
+    if (loading) {
+      interval = setInterval(() => {
+        setElapsedTime((prevTime) => {
+          if (prevTime >= 240) {
+            clearInterval(interval);
+            return 240;
+          }
+          return prevTime + 1;
+        });
+      }, 1000);
+    } else {
+      setElapsedTime(0);
+    }
+    return () => clearInterval(interval);
+  }, [loading]);
 
   const handleFileUpload = (acceptedFiles) => {
     const file = acceptedFiles[0];
@@ -163,14 +182,23 @@ return (
       )}
       {loading && (
         <div className="loading-block">
-          <div className="spinner-border" role="status">
-            <span className="sr-only"></span>
-          </div>
           <p>Enhancing image<span className="dots"></span></p>
-          <p>Estimated processing time for the first image is about 4-5 minutes</p>
-          <p>For the latter images it is about 2-3 minutes</p>
-        </div>
-      )}
+          <div className="progress">
+            <div
+              className="progress-bar"
+              role="progressbar"
+              style={{ width: `${(elapsedTime / 240) * 100}%` }}
+              aria-valuenow={(elapsedTime / 240) * 100}
+              aria-valuemin="0"
+              aria-valuemax="100"
+            >
+              {Math.round((elapsedTime / 240) * 100)}%
+            </div>
+          </div>
+          <p className="advice">Estimated processing time for the first image is about 4-5 minutes</p>
+          <p className="advice">For the latter images it is about 2-3 minutes</p>
+      </div>
+    )}
     </Container>
     {enhancedImages.length > 0 && (
       <div className="ready">
