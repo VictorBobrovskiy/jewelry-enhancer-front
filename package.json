@@ -1,5 +1,6 @@
 {
   "name": "jewelry-enhancer",
+  "homepage": "https:///VictorBobrovskiy.github.io/jewelry-enhancer-front/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -18,7 +19,6 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "test": "jest",
     "eject": "react-scripts eject"
