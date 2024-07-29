@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Axios from 'axios';
 import Dropzone from 'react-dropzone';
-import { Container, Row, Col, Button, Form, Spinner, Image } from 'react-bootstrap';
+import { Container, Row, Col, Button, Form, Image } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Enhancer.css';
 
@@ -43,7 +43,7 @@ function Enhancer() {
     };
     reader.readAsDataURL(file);
 
-    const uploadUrl = "https://6253-181-29-45-213.ngrok-free.app/image";
+    const uploadUrl = "https://18d1-181-29-45-213.ngrok-free.app/image";
     const formData = new FormData();
     formData.append('file', file);
 
@@ -62,7 +62,7 @@ function Enhancer() {
 
     setLoading(true);
 
-    const enhancementUrl = "https://6253-181-29-45-213.ngrok-free.app/prompt";
+    const enhancementUrl = "https://18d1-181-29-45-213.ngrok-free.app/prompt";
     const data = {
         filename: selectedFile.name,
         enhancementType: enhancementType,
@@ -122,11 +122,11 @@ return (
       {selectedFile && (
         <Row className="control">
           <Col className="selectedFile">
-            <p>Selected File: {selectedFile.name}</p>
+            <p className="advice">Selected File: {selectedFile.name}</p>
             <Form className="form">
               <Form.Group>
                 <Form.Label>Enhancement type:</Form.Label>
-                <div>
+                <div className="radio">
                   <Form.Check
                     className="formCheck"
                     type="radio"
@@ -174,7 +174,9 @@ return (
                 />
                 <Form.Text>{denoiseLevel}</Form.Text>
               </Form.Group>
-
+              <p className="advice">For realistic images choose between 0.2 and 0.4 </p>
+              <p className="advice">For artistic images choose between 0.5 and 0.7 </p>
+              <p className="advice">Denoise above 0.7 use at your own risk</p>
               <Button onClick={handleEnhanceImage} disabled={loading}>Enhance Image</Button>
             </Form>
           </Col>
@@ -195,8 +197,8 @@ return (
               {Math.round((elapsedTime / 240) * 100)}%
             </div>
           </div>
-          <p className="advice">Estimated processing time for the first image is about 4-5 minutes</p>
-          <p className="advice">For the latter images it is about 2-3 minutes</p>
+          <p className="advice">Estimated processing time for the first image is about 4-5 minutes. For the latter images it is about 2-3 minutes</p>
+          
       </div>
     )}
     </Container>

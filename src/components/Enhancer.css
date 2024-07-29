@@ -56,21 +56,28 @@ h1 {
   margin: 10px auto;
 }
 
-.form {
-  height: 320px;
+.form-label {
+  text-align: center;
+  margin: 0 auto;
+}
+
+.radio {
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  margin: 10px auto;
+  justify-content: space-around;
 }
 
 .formCheck {
-  margin: 2px;
+  margin: 0;
   text-align: left;
+  flex-direction: row;
 }
 
 .textArea {
   margin: 5px auto;
+}
+
+Button {
+  margin-top: 10px;
 }
 
 .slider {
@@ -115,8 +122,9 @@ h1 {
 }
 
 .advice {
-  margin-top: 5%;
+  margin:0;
   font-style: italic;
+  font-size: 87%;
 }
 
 
