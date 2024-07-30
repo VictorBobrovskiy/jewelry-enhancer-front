@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/jewelry-enhancer-front/static/css/main.91de1e9b.css",
-    "main.js": "/jewelry-enhancer-front/static/js/main.5278c590.js",
+    "main.css": "/jewelry-enhancer-front/static/css/main.9f474d2e.css",
+    "main.js": "/jewelry-enhancer-front/static/js/main.838b3807.js",
     "index.html": "/jewelry-enhancer-front/index.html",
-    "main.91de1e9b.css.map": "/jewelry-enhancer-front/static/css/main.91de1e9b.css.map",
-    "main.5278c590.js.map": "/jewelry-enhancer-front/static/js/main.5278c590.js.map"
+    "main.9f474d2e.css.map": "/jewelry-enhancer-front/static/css/main.9f474d2e.css.map",
+    "main.838b3807.js.map": "/jewelry-enhancer-front/static/js/main.838b3807.js.map"
   },
   "entrypoints": [
-    "static/css/main.91de1e9b.css",
-    "static/js/main.5278c590.js"
+    "static/css/main.9f474d2e.css",
+    "static/js/main.838b3807.js"
   ]
 }
